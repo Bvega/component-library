@@ -1,6 +1,5 @@
-// src/components/UserProfileCard/UserProfileCard.tsx
 import React from 'react';
-import { UserProfileCardProps } from '../../types';
+import type { UserProfileCardProps } from '../../types';
 
 export const UserProfileCard: React.FC<UserProfileCardProps> = ({
   user,
@@ -10,7 +9,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
   children
 }) => {
   return (
-    <div className="border p-4 rounded shadow bg-white flex gap-4">
+    <div className="border p-4 rounded shadow bg-white flex gap-4 items-start">
       {user.avatarUrl && (
         <img
           src={user.avatarUrl}
@@ -27,7 +26,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
       {onEdit && (
         <button
           onClick={() => onEdit(user.id)}
-          className="self-start ml-auto text-blue-500 hover:underline text-sm"
+          className="text-sm text-blue-500 hover:underline ml-4"
         >
           Edit Profile
         </button>

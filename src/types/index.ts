@@ -1,4 +1,3 @@
-// src/types/index.ts
 export type AlertType = 'success' | 'error' | 'warning' | 'info';
 
 export interface AlertBoxProps {
