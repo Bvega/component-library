@@ -1,6 +1,4 @@
-Excellent — you’ve successfully pushed your clean, working version to GitHub, and everything is in sync. Now let’s create the `tutorial.md` file to serve as a walkthrough for using the component library.
 
----
 
 ### 📘 `tutorial.md` (Full Copy & Paste Version)
 
