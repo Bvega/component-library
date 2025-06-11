@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React, { useState } from 'react';
+import { AlertBox } from './components/AlertBox/AlertBox';
+import { UserProfileCard } from './components/UserProfileCard/UserProfileCard';
+import { ProductDisplay } from './components/ProductDisplay/ProductDisplay';
+
+const demoUser = {
+  id: '1',
+  name: 'Jane Doe',
+  email: 'jane.doe@example.com',
+  role: 'Frontend Developer',
+  avatarUrl: 'https://i.pravatar.cc/150?img=32'
+};
+
+const demoProduct = {
+  id: '1',
+  name: 'Noise Cancelling Headphones',
+  price: 129.99,
+  description: 'Premium over-ear headphones with active noise cancellation.',
+  imageUrl: 'https://via.placeholder.com/300x200.png?text=Headphones',
+  inStock: true
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showAlert, setShowAlert] = useState(false);
+  const [cartItems, setCartItems] = useState<string[]>([]);
+
+  const handleAddToCart = (productId: string) => {
+    setCartItems(prev => [...prev, productId]);
+    setShowAlert(true);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="p-6 max-w-4xl mx-auto space-y-6">
+      {showAlert && (
+        <AlertBox
+          type="success"
+          message="Product added to cart!"
+          onClose={() => setShowAlert(false)}
+        >
+          <p className="text-sm">Check your cart for more details.</p>
+        </AlertBox>
+      )}
+
+      <UserProfileCard
+        user={demoUser}
+        showEmail
+        showRole
+        onEdit={(userId) => alert(`Editing user: ${userId}`)}
+      >
+        <p className="text-xs text-gray-500">Last login: 2 hours ago</p>
+      </UserProfileCard>
+
+      <ProductDisplay
+        product={demoProduct}
+        showDescription
+        showStockStatus
+        onAddToCart={handleAddToCart}
+      >
+        <p className="text-xs text-gray-500">Free shipping on orders over $50</p>
+      </ProductDisplay>
+    </div>
+  );
 }
 
-export default App
+export default App;
